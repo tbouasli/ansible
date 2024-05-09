@@ -1,0 +1,52 @@
+- name: Install Zsh
+  become: true
+  ansible.builtin.package:
+    name: zsh
+    state: present
+
+- name: Set Zsh as default shell
+  become: true
+  changed_when: false
+  ansible.builtin.command:
+    cmd: chsh -s /bin/zsh
+
+- name: Download Oh My Zsh installation script 
+  become: true
+  changed_when: false
+  ansible.builtin.get_url:
+    url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install_oh_my_zsh.sh
+    mode: 700
+
+- name: Run Oh My Zsh installation script
+  become: true
+  changed_when: false
+  ansible.builtin.command:
+    cmd: "/tmp/install_oh_my_zsh.sh"
+    argv:
+      - --unattended
+
+- name: Remove Oh My Zsh installation script
+  become: true
+  changed_when: false
+  ansible.builtin.file:
+    path: /tmp/install_oh_my_zsh.sh
+    state: absent
+
+- name: Install Powerlevel10k
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: ~/powerlevel10k
+    depth: 1
+  
+- name: Install Zsh Syntax Highlighting
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    depth: 1
+
+- name: Install Zsh Autosuggestions
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    depth: 1
