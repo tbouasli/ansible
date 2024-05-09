@@ -1,0 +1,19 @@
+- name: Configure Development Environment
+  hosts: all
+  tasks:
+    - name: System Packages
+      tags: ["core", "neovim", "install", "nvchad", "tmux"]
+      ansible.builtin.include_tasks:
+        file: tasks/core.yaml.ansible
+    - name: ZSH
+      tags: ["zsh"]
+      ansible.builtin.include_tasks:
+        file: tasks/zsh.yaml.ansible
+    - name: Node.js
+      tags: ["node"]
+      ansible.builtin.include_tasks:
+        file: tasks/node.yaml.ansible
+    - name: Neovim
+      tags: ["neovim", "nvchad"]
+      ansible.builtin.include_tasks:
+        file: tasks/neovim.yaml.ansible

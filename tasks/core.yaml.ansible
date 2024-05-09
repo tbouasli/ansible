@@ -1,0 +1,31 @@
+- name: "Install Core System Packages"
+  tags: ["core", "install", "neovim"]
+  become: true
+  changed_when: false
+  ansible.builtin.package:
+    name:
+      - ninja-build
+      - gettext
+      - cmake
+      - unzip
+      - curl
+      - build-essential
+      - git
+
+- name: "Install Tmux"
+  tags: ["core", "install", "tmux"]
+  become: true
+  changed_when: false
+  ansible.builtin.package:
+    name:
+      - tmux
+
+
+- name: "Install Fuzzy Finder"
+  tags: ["core", "install", "neovim", "nvchad"]
+  become: true
+  changed_when: false
+  ansible.builtin.package:
+    name:
+      - fzf
+      - ripgrep

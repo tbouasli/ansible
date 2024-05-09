@@ -1,0 +1,4 @@
+- name: "Clone Alacritty"
+  ansible.builtin.git:
+    repo: https://github.com/alacritty/alacritty.git
+
