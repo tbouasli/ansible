@@ -11,6 +11,12 @@
       - curl
       - build-essential
       - git
+      - pkg-config
+      - libfreetype6-dev
+      - libfontconfig1-dev
+      - libxcb-xfixes0-dev
+      - libxkbcommon-dev
+      - python3
 
 - name: "Install Tmux"
   tags: ["core", "install", "tmux"]
@@ -19,6 +25,19 @@
   ansible.builtin.package:
     name:
       - tmux
+
+- name: "Download rust installer"
+  ansible.builtin.get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/rustup.sh
+    mode: 'u+x'
+  tags: ["core", "install", "rust"]
+
+- name: "Install Rust"
+  shell: /tmp/rustup.sh -y
+  args:
+    creates: ~/.cargo/bin/rustup
+  tags: ["core", "install", "rust"]
 
 
 - name: "Install Fuzzy Finder"

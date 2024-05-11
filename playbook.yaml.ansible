@@ -17,3 +17,7 @@
       tags: ["neovim", "nvchad"]
       ansible.builtin.include_tasks:
         file: tasks/neovim.yaml.ansible
+    - name: Alacritty
+      tags: ["alacritty"]
+      ansible.builtin.include_tasks:
+        file: tasks/alacritty.yaml.ansible

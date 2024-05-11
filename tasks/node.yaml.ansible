@@ -16,14 +16,6 @@
     path: ~/install_nvm.sh
     state: absent
 
-- name: Export NVM environment variables
-  tags: ["node"]
-  ansible.builtin.command:
-    cmd: |
-      export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
 - name: Install Node.js
   tags: ["node"]
-  ansible.builtin.command:
-    cmd: nvm install --lts
+  shell: NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install --lts

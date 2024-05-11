@@ -22,9 +22,7 @@
   become: true
   changed_when: false
   ansible.builtin.command:
-    cmd: "/tmp/install_oh_my_zsh.sh"
-    argv:
-      - --unattended
+    cmd: "/tmp/install_oh_my_zsh.sh --unattended"
 
 - name: Remove Oh My Zsh installation script
   become: true
