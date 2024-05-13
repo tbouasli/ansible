@@ -27,17 +27,17 @@
       - tmux
 
 - name: "Download rust installer"
+  tags: ["core", "install", "rust"]
   ansible.builtin.get_url:
     url: https://sh.rustup.rs
     dest: /tmp/rustup.sh
     mode: 'u+x'
-  tags: ["core", "install", "rust"]
 
 - name: "Install Rust"
+  tags: ["core", "install", "rust"]
   shell: /tmp/rustup.sh -y
   args:
     creates: ~/.cargo/bin/rustup
-  tags: ["core", "install", "rust"]
 
 
 - name: "Install Fuzzy Finder"

@@ -1,5 +1,5 @@
 - name: "Clone Alacritty"
-  tags: alacritty
+  tags: [alacritty, install]
   ansible.builtin.git:
     repo: https://github.com/alacritty/alacritty.git
     dest: /tmp/alacritty
@@ -7,14 +7,14 @@
     force: yes
 
 - name: "Install Alacritty"
-  tags: alacritty
+  tags: [alacritty, install]
   ansible.builtin.shell:
     cmd: |
       cd /tmp/alacritty
       PATH="$HOME/.cargo/bin:$PATH" && cargo build --release
 
 - name: "Copy Alacritty to /usr/local/bin"
-  tags: alacritty
+  tags: [alacritty, install]
   become: true
   ansible.builtin.copy:
     src: /tmp/alacritty/target/release/alacritty
@@ -22,7 +22,7 @@
     mode: 0755  
 
 - name: "Create desktop entry"
-  tags: alacritty
+  tags: [alacritty, install]
   become: true
   ansible.builtin.copy:
     src: /tmp/alacritty/extra/linux/Alacritty.desktop
@@ -30,7 +30,7 @@
     mode: 0644
 
 - name: "Create icon"
-  tags: alacritty
+  tags: [alacritty, install]
   become: true
   ansible.builtin.copy:
     src: /tmp/alacritty/extra/logo/alacritty-term.svg
@@ -38,13 +38,13 @@
     mode: 0644
 
 - name: "Update desktop database"
-  tags: alacritty
+  tags: [alacritty, install]
   become: true
   ansible.builtin.command:
     cmd: update-desktop-database
 
 - name: "Set Alacritty as default terminal"
-  tags: alacritty
+  tags: [alacritty, install]
   become: true
   ansible.builtin.command:
     cmd: update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 50

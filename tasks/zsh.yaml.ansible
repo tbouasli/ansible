@@ -1,49 +1,47 @@
 - name: Install Zsh
+  tags: &zsh_tags ["zsh", "install"]
   become: true
   ansible.builtin.package:
     name: zsh
     state: present
 
 - name: Set Zsh as default shell
+  tags: *zsh_tags
   become: true
   changed_when: false
   ansible.builtin.command:
     cmd: chsh -s /bin/zsh
 
-- name: Download Oh My Zsh installation script 
-  become: true
-  changed_when: false
-  ansible.builtin.get_url:
-    url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    dest: /tmp/install_oh_my_zsh.sh
-    mode: 700
+- name: Check that the Zsh configuration file exists
+  tags: *zsh_tags
+  stat:
+    path: ~/.zshrc
+  register: oh_my_stats
 
-- name: Run Oh My Zsh installation script
-  become: true
-  changed_when: false
-  ansible.builtin.command:
-    cmd: "/tmp/install_oh_my_zsh.sh --unattended"
-
-- name: Remove Oh My Zsh installation script
-  become: true
-  changed_when: false
-  ansible.builtin.file:
-    path: /tmp/install_oh_my_zsh.sh
-    state: absent
+- name: Download Oh My Zsh installation script
+  tags: *zsh_tags
+  become_user: "$USER"
+  changed_when: oh_my_stats.stat.exists == false
+  ansible.builtin.shell:
+    cmd: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer --unattended
 
 - name: Install Powerlevel10k
+  tags: *zsh_tags
+  become_user: "$USER"
   ansible.builtin.git:
     repo: https://github.com/romkatv/powerlevel10k.git
-    dest: ~/powerlevel10k
+    dest: "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
     depth: 1
   
 - name: Install Zsh Syntax Highlighting
+  tags: *zsh_tags
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
     dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     depth: 1
 
 - name: Install Zsh Autosuggestions
+  tags: *zsh_tags
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
     dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions

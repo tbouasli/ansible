@@ -6,18 +6,26 @@
       ansible.builtin.include_tasks:
         file: tasks/core.yaml.ansible
     - name: ZSH
-      tags: ["zsh"]
+      tags: &zsh_tags ["zsh", "install"]
       ansible.builtin.include_tasks:
         file: tasks/zsh.yaml.ansible
     - name: Node.js
-      tags: ["node"]
+      tags: &node_tags ["node", "install"]
       ansible.builtin.include_tasks:
         file: tasks/node.yaml.ansible
     - name: Neovim
-      tags: ["neovim", "nvchad"]
+      tags: &neovim_tags ["neovim", "nvchad", "install"]
       ansible.builtin.include_tasks:
         file: tasks/neovim.yaml.ansible
     - name: Alacritty
-      tags: ["alacritty"]
+      tags: &alacritty_tags ["alacritty", "install"]
       ansible.builtin.include_tasks:
         file: tasks/alacritty.yaml.ansible
+    - name: Nerd Fonts
+      tags: &nerd_fonts_tags ["nerd_fonts", "install"]
+      ansible.builtin.include_tasks:
+        file: tasks/nerd_fonts.yaml.ansible
+    - name: Dotfiles
+      tags: &dotfiles_tags ["dotfiles", "install"]
+      ansible.builtin.include_tasks:
+        file: tasks/dotfiles.yaml.ansible

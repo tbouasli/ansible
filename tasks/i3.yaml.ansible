@@ -1,0 +1,6 @@
+- name: Install I3
+  tags: [i3, de]
+  apt:
+    name: i3
+    state: present
+  become: yes
