@@ -1,5 +1,5 @@
 - name: Install Zsh
-  tags: &zsh_tags ["zsh", "install"]
+  tags: &zsh_tags ["zsh"]
   become: true
   ansible.builtin.package:
     name: zsh

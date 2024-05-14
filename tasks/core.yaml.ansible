@@ -1,5 +1,5 @@
 - name: "Install Core System Packages"
-  tags: ["core", "install", "neovim"]
+  tags: ["core", "neovim"]
   become: true
   changed_when: false
   ansible.builtin.package:
@@ -18,30 +18,23 @@
       - libxkbcommon-dev
       - python3
 
-- name: "Install Tmux"
-  tags: ["core", "install", "tmux"]
-  become: true
-  changed_when: false
-  ansible.builtin.package:
-    name:
-      - tmux
 
 - name: "Download rust installer"
-  tags: ["core", "install", "rust"]
+  tags: [core, rust, alacritty]
   ansible.builtin.get_url:
     url: https://sh.rustup.rs
     dest: /tmp/rustup.sh
     mode: 'u+x'
 
 - name: "Install Rust"
-  tags: ["core", "install", "rust"]
+  tags: [core, rust, alacritty]
   shell: /tmp/rustup.sh -y
   args:
     creates: ~/.cargo/bin/rustup
 
 
 - name: "Install Fuzzy Finder"
-  tags: ["core", "install", "neovim", "nvchad"]
+  tags: ["core", "neovim", "nvchad"]
   become: true
   changed_when: false
   ansible.builtin.package:

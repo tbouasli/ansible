@@ -1,11 +1,18 @@
 - name: Clone dotfiles
-  tags: [dotfiles, install]
+  tags: [dotfiles]
   git:
     repo: https://github.com/ThomasBouasli/dotfiles
     dest: ~/.dotfiles
     update: yes
     force: yes
 
+- name: Install stow
+  tags: [dotfiles]
+  changed_when: false
+  apt:
+    name: stow
+    state: present
+
 - name: Stow dotfiles
-  tags: [dotfiles, install]
+  tags: [dotfiles]
   command: stow -t ~ -d ~/.dotfiles -S $(ls ~/.dotfiles)

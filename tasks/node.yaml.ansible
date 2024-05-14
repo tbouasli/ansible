@@ -1,21 +1,21 @@
 - name: Install NVM
-  tags: ["node"]
+  tags: [node]
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh
     dest: ~/install_nvm.sh
     mode: '0755'
 
 - name: Run NVM installation script
-  tags: ["node"]
+  tags: [node]
   ansible.builtin.command:
     cmd: ~/install_nvm.sh
 
 - name: Remove NVM installation script
-  tags: ["node"]
+  tags: [node]
   ansible.builtin.file:
     path: ~/install_nvm.sh
     state: absent
 
 - name: Install Node.js
-  tags: ["node"]
+  tags: [node]
   shell: NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install --lts

@@ -1,5 +1,5 @@
 - name: Clone Neovim
-  tags: ["neovim"]
+  tags: [neovim]
   changed_when: false
   ansible.builtin.git:
     repo: https://github.com/neovim/neovim
@@ -8,7 +8,7 @@
     force: true
 
 - name: Build and Install Neovim
-  tags: ["neovim"]
+  tags: [neovim]
   ansible.builtin.shell:
     cmd: |
       cd ~/neovim
@@ -18,7 +18,7 @@
     creates: /usr/local/bin/nvim
 
 - name: Install NvChad
-  tags: ["nvchad"]
+  tags: [nvchad]
   ansible.builtin.git:
     repo: https://github.com/NvChad/starter
     dest: ~/.config/nvim

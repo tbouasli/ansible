@@ -1,40 +1,40 @@
 - name: Install ssh personal key
-  tags: [dotfiles, install, ssh]
+  tags: [dotfiles, ssh]
   ansible.builtin.copy:
     src: ../.ssh/personal
     dest: ~/.ssh/personal
     mode: 0600
 
 - name: Install ssh personal key public key
-  tags: [dotfiles, install, ssh]
+  tags: [dotfiles, ssh]
   ansible.builtin.copy:
     src: ../.ssh/personal.pub
     dest: ~/.ssh/personal.pub
     mode: 0600
   
 - name: Install ssh work key
-  tags: [dotfiles, install, ssh]
+  tags: [dotfiles, ssh]
   ansible.builtin.copy:
     src: ../.ssh/work
     dest: ~/.ssh/work
     mode: 0600
 
 - name: Install ssh work key public key
-  tags: [dotfiles, install, ssh]
+  tags: [dotfiles, ssh]
   ansible.builtin.copy:
     src: ../.ssh/work.pub
     dest: ~/.ssh/work.pub
     mode: 0600
 
 - name: Set personal key as authorized key
-  tags: [dotfiles, install, ssh]
+  tags: [dotfiles, ssh]
   ansible.builtin.authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     key: "{{ lookup('env', 'HOME') }}/.ssh/personal.pub" 
     state: present
 
 - name: Set work key as authorized key
-  tags: [dotfiles, install, ssh]
+  tags: [dotfiles, ssh]
   ansible.builtin.authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     key: "{{ lookup('env', 'HOME') }}/.ssh/work.pub"

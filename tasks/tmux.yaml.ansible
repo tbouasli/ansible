@@ -1,0 +1,7 @@
+- name: "Install Tmux"
+  tags: ["tmux"]
+  become: true
+  changed_when: false
+  ansible.builtin.package:
+    name:
+      - tmux

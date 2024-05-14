@@ -1,14 +1,17 @@
 - name: Download JetBrainsMono.zip
+  tags: [fonts, zsh]
   ansible.builtin.get_url:
     url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
     dest: /tmp/JetBrainsMono.zip
 
 - name: Create fonts directory
+  tags: [fonts, zsh]
   ansible.builtin.file:
     path: $HOME/.local/share/fonts
     state: directory
 
 - name: Unzip JetBrainsMono.zip
+  tags: [fonts, zsh]
   ansible.builtin.unarchive:
     src: /tmp/JetBrainsMono.zip
     dest: $HOME/.local/share/fonts
@@ -16,4 +19,5 @@
     creates: $HOME/.local/share/fonts/JetBrainsMono
 
 - name: Update font cache
+  tags: [fonts, zsh]
   ansible.builtin.shell: fc-cache -f -v
