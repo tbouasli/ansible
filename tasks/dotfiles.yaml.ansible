@@ -15,4 +15,4 @@
 
 - name: Stow dotfiles
   tags: [dotfiles]
-  command: stow -t ~ -d ~/.dotfiles -S $(ls ~/.dotfiles)
+  command: stow -t ~ -d $HOME/.dotfiles -S $(ls $HOME/.dotfiles)
