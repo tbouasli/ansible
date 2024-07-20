@@ -15,4 +15,4 @@
 
 - name: Stow dotfiles
   tags: [dotfiles]
-  command: "stow -t ~ -d {{ lookup('env', 'HOME') }}/.dotfiles -S $(ls {{ lookup('env', 'HOME') }}/.dotfiles)" 
+  command: "{{ lookup('env', 'HOME') }}/.dotfiles/.local/bin/scripts/dotfiles" 
