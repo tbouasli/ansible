@@ -15,7 +15,7 @@
 - name: Check that the Zsh configuration file exists
   tags: *zsh_tags
   stat:
-    path: ~/.oh-my-zsh
+    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
   register: oh_my_stats
 
 - name: Download Oh My Zsh installation script
