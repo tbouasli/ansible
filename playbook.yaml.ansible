@@ -8,6 +8,10 @@
       tags: ["core", "neovim", "install", "nvchad", "tmux"]
       ansible.builtin.include_tasks:
         file: tasks/core.yaml.ansible
+    - name: I3
+      tags: ["i3"]
+      ansible.builtin.include_tasks:
+        file: tasks/i3.yaml.ansible
     - name: ZSH
       tags: ["zsh", "install"]
       ansible.builtin.include_tasks:
