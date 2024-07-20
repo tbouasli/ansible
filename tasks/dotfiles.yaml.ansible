@@ -9,6 +9,7 @@
 - name: Install stow
   tags: [dotfiles]
   changed_when: false
+  become: true
   apt:
     name: stow
     state: present
