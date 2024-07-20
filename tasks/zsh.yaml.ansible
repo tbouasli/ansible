@@ -16,13 +16,13 @@
   tags: *zsh_tags
   stat:
     path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
-  register: oh_my_stats
+  register: oh_my_zsh_stats
 
 - name: Download Oh My Zsh installation script
   tags: *zsh_tags
   become_user: "$USER"
-  changed_when: oh_my_stats.stat.exists == false
-  when: oh_my_stats.stat.exists == false
+  changed_when: oh_my_zsh_stats.stat.exists == false
+  when: oh_my_zsh_stats.stat.exists == false
   ansible.builtin.shell:
     cmd: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer --unattended
 
