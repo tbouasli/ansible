@@ -37,6 +37,6 @@
       ansible.builtin.include_tasks:
         file: tasks/dotfiles.yaml.ansible
     - name: Software
-      tags: ["software"]
+      tags: [software, beekeeper]
       ansible.builtin.include_tasks:
         file: tasks/software.yaml.ansible
