@@ -1,0 +1,20 @@
+- name: Check for Applications Directory
+  tags: [software]
+  ansible.builtin.stat:
+    path: "{{ lookup('env', 'HOME') }}/Applications"
+  register: applications_stats
+
+- name: Create Applications Directory
+  tags: [software]
+  changed_when: applications_stats.stat.exists == false
+  when: applications_stats.stat.exists == false
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/Applications"
+    state: directory
+
+- name: Download Beekeeper Studio
+  tags: [beekeeper, software]
+  ansible.builtin.get_url:
+    url: https://github.com/beekeeper-studio/ultimate-releases/releases/download/v4.6.4/Beekeeper-Studio-Ultimate-4.6.4.AppImage
+    dest: "{{ lookup('env', 'HOME') }}/Applications/Beekeeper-Studio.AppImage"
+    mode: '0755'
