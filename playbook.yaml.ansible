@@ -40,3 +40,7 @@
       tags: [software, beekeeper]
       ansible.builtin.include_tasks:
         file: tasks/software.yaml.ansible
+    - name: Tmux
+      tags: [tmux, tpm]
+      ansible.builtin.include_tasks:
+        file: tasks/tmux.yaml.ansible

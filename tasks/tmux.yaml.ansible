@@ -5,3 +5,10 @@
   ansible.builtin.package:
     name:
       - tmux
+
+- name: Install Tmux Package Manager
+  tags: [tmux, tpm]
+  ansible.builtin.git:
+    # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
