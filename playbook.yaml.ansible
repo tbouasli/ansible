@@ -44,3 +44,7 @@
       tags: [tmux, tpm]
       ansible.builtin.include_tasks:
         file: tasks/tmux.yaml.ansible
+    - name: ssh 
+      tags: [ssh]
+      ansible.builtin.include_tasks:
+        file: tasks/ssh.yaml.ansible

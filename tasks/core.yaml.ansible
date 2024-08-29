@@ -41,3 +41,7 @@
     name:
       - fzf
       - ripgrep
+- name: "Install Zoxide"
+  tags: ["core", "zoxide"]
+  changed_when: false
+  ansible.builtin.shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
